@@ -1,8 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
-
+import time
 #set the chrome using the latest chrome version
-service= Service('C:\\Users\\user\\Downloads\\chromedriver.exe')
+# service= Service('C:\\Users\\user\\Downloads\\chromedriver.exe')
 
 def get_driver():
     #set options to make browsing easier
@@ -19,13 +19,16 @@ def get_driver():
     options.add_experimental_option("excludeSwitches",["enable-automation"])
     options.add_argument("disable-blink-features=AUtomationControlled")
 
-    driver = webdriver.Chrome(service=service,options=options)
+    # driver = webdriver.Chrome(service=service,options=options)
+    driver = webdriver.Chrome(options=options)
     driver.get("http://automated.pythonanywhere.com/")
     return driver
 
 def main():
     driver = get_driver()
-    element = driver.find_element(by="xpath",value="/html/body/div[1]/div/h1[1]")
+    #let the browser stop for 2 seconds
+    time.sleep(2)
+    element = driver.find_element(by="xpath",value="/html/body/div[1]/div/h1[2]")
     return element.text
 
 print(main())
