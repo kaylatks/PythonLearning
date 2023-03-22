@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 import time
+from selenium.webdriver.common.keys import Keys
 #set the chrome using the latest chrome version
 service= Service('C:\\Users\\user\\Downloads\\chromedriver.exe')
 
@@ -21,7 +22,7 @@ def get_driver():
 
     driver = webdriver.Chrome(service=service,options=options)
     # driver = webdriver.Chrome(options=options)
-    driver.get("http://automated.pythonanywhere.com/")
+    driver.get("https://automated.pythonanywhere.com/login/")
     return driver
 
 def clean_text(text):
@@ -31,9 +32,11 @@ def clean_text(text):
 
 def main():
     driver = get_driver()
-    #let the browser stop for 2 seconds
+    driver.find_element(by="id",value="id_username").send_keys("automated")
     time.sleep(2)
-    element = driver.find_element(by="xpath",value="/html/body/div[1]/div/h1[2]")
-    return clean_text(element.text)
+    #Keys.RETURN is pressing enter in keyboard
+    driver.find_element(by="id",value="id_password").send_keys("automatedautomated" + Keys.RETURN)
+    time.sleep(2)
+    driver.find_element(by="xpath",value="/html/body/nav/div/a").click()
+    print(driver.current_url)
 
-print(main())
