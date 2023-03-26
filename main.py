@@ -38,5 +38,9 @@ def main():
     driver.find_element(by="id",value="id_password").send_keys("automatedautomated" + Keys.RETURN)
     time.sleep(2)
     driver.find_element(by="xpath",value="/html/body/nav/div/a").click()
-    print(driver.current_url)
+    time.sleep(2)
+    timer = driver.find_element(by="xpath",value="/html/body/div[1]/div/h1[2]").text
+    print(clean_text(timer))
+    # print(driver.current_url)
 
+print(main())
